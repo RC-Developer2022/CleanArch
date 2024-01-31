@@ -1,11 +1,13 @@
-﻿namespace CleanArch.Domain.Entities.Abstractions;
+﻿using CleanArch.Domain.Structs;
+
+namespace CleanArch.Domain.Entities.Abstractions;
 
 public abstract class Entity
 {
-    public Guid Id { get; protected set; }
+    public CustomerId Id { get; protected set; } = CustomerId.Empty;
 
     public Entity()
     {
-        Id = Guid.NewGuid();
+        Id = CustomerId.NewGuidCustomerId();
     }
 }

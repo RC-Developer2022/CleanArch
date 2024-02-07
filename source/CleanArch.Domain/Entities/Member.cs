@@ -1,4 +1,6 @@
-﻿using CleanArch.Domain.Entities.Abstractions;
+﻿using System.Text.Json.Serialization;
+
+using CleanArch.Domain.Entities.Abstractions;
 using CleanArch.Domain.Structs;
 using CleanArch.Domain.Validations;
 
@@ -12,6 +14,9 @@ public sealed class Member : Entity
     public string? Email { get; private set; }
     public bool? IsActive { get; private set; }
 
+    public Member() {}
+
+    [JsonConstructor]
     public Member(string firstName, string lastName, string gender, string email, bool isActive)
     {
         ValidateDomain(firstName, lastName, gender, email, isActive);

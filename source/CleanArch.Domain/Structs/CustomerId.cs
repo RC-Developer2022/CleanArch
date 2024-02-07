@@ -1,4 +1,7 @@
-﻿namespace CleanArch.Domain.Structs;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CleanArch.Domain.Structs;
+
 
 public readonly record struct CustomerId(Guid value)
 {

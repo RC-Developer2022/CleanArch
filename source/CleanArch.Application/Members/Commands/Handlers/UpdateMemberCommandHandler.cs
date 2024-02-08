@@ -18,7 +18,7 @@ public class UpdateMemberCommandHandler : IRequestHandler<UpdateMemberCommand, M
         if (existingMember is null)
             throw new InvalidOperationException("Member not found");
 
-        existingMember.Update(request.FirstName, request.LastName, request.Gender, request.Email, request.IsActive ?? false);
+        existingMember.Update(request.FirstName, request.LastName, request?.Gender, request.Email, request.IsActive ?? false);
         _unitOfWork.MemberRepository.UpdateMember(existingMember);
         await _unitOfWork.CommitAsync();
 

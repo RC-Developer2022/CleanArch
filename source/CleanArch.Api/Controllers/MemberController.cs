@@ -1,5 +1,6 @@
-﻿using CleanArch.Application.Members.Commnads;
+﻿using CleanArch.Application.Members.Commands;
 using CleanArch.Domain.Abstractions;
+using CleanArch.Domain.Structs;
 
 using MediatR;
 
@@ -21,21 +22,21 @@ public class MembersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMember(int id)
+    public async Task<IActionResult> GetMember(CustomerId id)
     {
         var member = await _unitOfWork.MemberRepository.GetMemberById(id);
         return member != null ? Ok(member) : NotFound("Member not found.");
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateMember(CreateMemberCommand command)
+    public async Task<IActionResult> CreateMember(CreateMamberCommand command)
     {
         var createdMember = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetMember), new { id = createdMember.Id }, createdMember);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMember(int id, UpdateMemberCommand command)
+    public async Task<IActionResult> UpdateMember(CustomerId id, UpdateMemberCommand command)
     {
         command.Id = id;
         var updatedMember = await _mediator.Send(command);
@@ -45,7 +46,7 @@ public class MembersController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMember(int id)
+    public async Task<IActionResult> DeleteMember(CustomerId id)
     {
         var command = new DeleteMemberCommand { Id = id };
         var deletedMember = await _mediator.Send(command);

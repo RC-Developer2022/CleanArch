@@ -4,7 +4,7 @@ using MediatR;
 namespace CleanArch.Application.Members.Commands;
 
 public sealed class CreateMamberCommand : IRequest<Member>
-{
+{                   
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Gender { get; set; }
